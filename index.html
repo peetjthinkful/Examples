@@ -30,37 +30,89 @@
 
       </header>
       <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h1>
+<a name="introduction-to-objects" class="anchor" href="#introduction-to-objects"><span class="octicon octicon-link"></span></a>Introduction to Objects</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p><strong>During a mentor session with one of my students, we started talking about how she might approach the Shopping List project. The obvious and simplest approach was (from an implementation point of view) to hold a bunch of String objects inside an array. However, on reflection we felt that this could perhaps be too simplistic. For example, let's say that one of the project requirements was to be able to cross out items on the list instead of deleting the item. It would be pretty hard to represent this if all we had was an Array of String objects.</strong></p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<p>Enter the Object. As we discussed the problem, we realised that if we could perhaps have a slightly more complex representation of the item in the list (after all each item is a real thing, has certain properties and is certainly more than a just a string of letters!), then perhaps we could give the item a certain state which would mean that it is deleted but not removed from the list - ie. crossed out.</p>
+
+<p>It seemed to me to be the perfect place to start introducing objects our mentor sessions. Let's take a look at how we might model a shopping list in Javascript.</p>
+
+<p>Let's say that we have 3 items in our shopping list: Bread, Apples and Whiskey. It would be very simple to implement this as a Javascript Array like so:</p>
+
+<h3>
+<a name="example-1----a-shopping-list-as-an-array-of-strings" class="anchor" href="#example-1----a-shopping-list-as-an-array-of-strings"><span class="octicon octicon-link"></span></a>Example 1  - A Shopping List as an Array of Strings</h3>
+
+<pre><code>var myShoppingList = [];
+myShoppingList.push("Bread");
+myShoppingList.push("Apples");
+myShoppingList.push("Whiskey");
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Done! Its simple but one might say it is too 'simplistic', ie. you might find for example that you want to model some behaviour but this implementation won't support it. For example if I wanted to be able to delete items from the list I would be ok - just get rid of the String object from the Array.</p>
+
+<p>However, if I wanted to merely cross out items, so I could retain the item in the list but have it notionally deleted - I might want to cross off items as I put them in my cart - then it would be pretty tricky to implement this behaviour with an Array of Strings. Of course it could be done and in numerous ways, however I believe that these 'solutions' would not be as intuitive and robust and a solution that employed an Array of Objects rather than Strings.</p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="example-2---introducing-the-object-way" class="anchor" href="#example-2---introducing-the-object-way"><span class="octicon octicon-link"></span></a>Example 2 - Introducing the Object way</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<pre><code>var myShoppingList = [];
+myShoppingList.push({ itemName: "Bread", itemPrice: 3.60, isDeleted: false});
+myShoppingList.push({ itemName: "Apples", itemPrice: 1.60, isDeleted: false});
+myShoppingList.push({ itemName: "Whiskey", itemPrice: 100.95, isDeleted: false});
+</code></pre>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<p>The example above add 3 objects to the <code>myShoppingList</code> Array. Note that the objects themselves are <em>object literals</em> created with the <code>{}</code> or curly brace syntax. Let's take one of the objects and break it down, before explaining why we gave it the attributes we did. So - I want a bottle of Whiskey for Christmas, so I added it to my shopping list:</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<pre><code>{ 
+    itemName: "Whiskey", 
+    itemPrice: 100.95, 
+    isDeleted: false
+}
+</code></pre>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<p>Let us (sort of) digress for a moment. It's pretty clear that I have given my bottle of whiskey 3 properties: a name, a price and an <code>isDeleted</code> property. The name and the price are pretty obvious but the <code>isDeleted</code> property means that I can still have the bottle of whiskey in the list but have it notionally crossed off the list. You could access the whiskey from the Array as follows:</p>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>var myWhiskeyBottle = myShoppingList[0];</p>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<p>You could further access any of the properties thus:</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<pre><code>var nameOfWhiskey = myWhiskeyBottle.name;
+var priceOfWhiskey = myWhiskeyBottle.price;
+var stateOfWhiskey = myWhiskeyBottle.isDeleted;
+
+console.log(nameOfWhiskey);
+console.log(priceOfWhiskey);
+console.log(stateOfWhiskey);
+</code></pre>
+
+<p>You will notice that I gave the whiskey an <code>isDeleted</code> value of <code>false</code>. So the scenario is as follows: </p>
+
+<p>I'm in the Bottle shop and I put my favourite bottle in my trolley. I cross it off my list. Effectively it has been deleted from the list but my requirements dictate that I should still see it on the list with a line through it. So I simply set the <code>isDeleted</code> property to <code>true</code>.</p>
+
+<p>My Array looks like this:</p>
+
+<pre><code>myShoppingList[0].isDeleted = false;
+myShoppingList[1].isDeleted = false;
+myShoppingList[2].isDeleted = true;
+</code></pre>
+
+<p>My Shopping list looks like this:</p>
+
+<ul>
+<li>Bread,</li>
+<li>Apples,</li>
+<li><del>Whiskey</del></li>
+</ul><p>The <code>isDeleted</code> property has given us the ability to provide a richer interface. This is just with a few object literals with a few simple properties. It is worth noting at this point that if we were building a production system we would find another more robust &amp; reusable way to create the objects themselves - however the point is here to get a sense of their usefulness in this and other non-trivial situations.</p>
+
+<p>Hopefully I have shown the value of starting to use objects in your code where you are trying to model even the simplest of things. Don't worry about starting with a simple object literal. You can get more complex as you begin to understand more about Javascript and system design.</p>
+
+<p>If you have any comments or questions regarding the above please don't hesitate to contact me.</p>
+
+<p><strong>Email: <a href="mailto:pjanuarius@thinkful.com">pjanuarius@thinkful.com</a></strong> </p>
+
+<p><strong>Twitter: <a href="https://github.com/peetj" class="user-mention">@peetj</a></strong></p>
       </section>
       <footer>
         <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
