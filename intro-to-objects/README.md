@@ -3,7 +3,7 @@
 
 Enter the Object. As we discussed the problem, we realised that if we could perhaps have a slightly more complex representation of the item in the list (after all each item is a real thing, has certain properties and is certainly more than a just a string of letters!), then perhaps we could give the item a certain state which would mean that it is deleted but not removed from the list - ie. crossed out.
 
-It seemed to me to be the perfect place to start introducing objects our mentor sessions. Let's take a look at how we might model a shopping list in Javascript.
+It seemed to me to be the perfect place to start introducing objects in our mentor sessions. Let's take a look at how we might model a shopping list in Javascript.
 
 Let's say that we have 3 items in our shopping list: Bread, Apples and Whiskey. It would be very simple to implement this as a Javascript Array like so:
 
@@ -25,7 +25,7 @@ However, if I wanted to merely cross out items, so I could retain the item in th
 	myShoppingList.push({ itemName: "Apples", itemPrice: 1.60, isDeleted: false});
 	myShoppingList.push({ itemName: "Whiskey", itemPrice: 100.95, isDeleted: false});
 	
-The example above add 3 objects to the `myShoppingList` Array. Note that the objects themselves are *object literals* created with the `{}` or curly brace syntax. Let's take one of the objects and break it down, before explaining why we gave it the attributes we did. So - I want a bottle of Whiskey for Christmas, so I added it to my shopping list:
+The example above adds 3 objects to the `myShoppingList` Array. Note that the objects themselves are *object literals* created with the `{}` or curly brace syntax. Let's take one of the objects and break it down, before explaining why we gave it the attributes we did. So - I want a bottle of Whiskey for Christmas, so I added it to my shopping list:
 
 	{ 
 		itemName: "Whiskey", 
