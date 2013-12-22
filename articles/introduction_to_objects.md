@@ -1,3 +1,5 @@
+---
+---
 #Introduction to Objects
 **During a mentor session with one of my students, we started talking about how she might approach the Shopping List project. The obvious and simplest approach was (from an implementation point of view) to hold a bunch of String objects inside an array. However, on reflection we felt that this could perhaps be too simplistic. For example, let's say that one of the project requirements was to be able to cross out items on the list instead of deleting the item. It would be pretty hard to represent this if all we had was an Array of String objects.**
 
